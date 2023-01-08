@@ -1,9 +1,5 @@
 import { Cars } from './../cars/cars.model';
-import { Model, Table, Column, DataType } from 'sequelize-typescript';
-import { OneToMany } from 'typeorm/decorator/relations/OneToMany';
-import { type } from 'os';
-import { ManyToOne } from 'typeorm';
-
+import { Model, Table, Column, DataType, HasOne } from 'sequelize-typescript';
 
 interface ColorCreationAttr {
   name: string
@@ -29,8 +25,6 @@ export class Colors extends Model<Colors, ColorCreationAttr>{
   })
   name: string;
 
-  @ManyToOne(() => Cars, (car) => car.color)
+  @HasOne(() => Cars, "colorId")
   car: Cars
-
-
 }

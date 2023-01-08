@@ -1,3 +1,5 @@
+import { Brands } from 'src/brands/brands.model';
+import { Colors } from './../colors/color.model';
 import { CreateCarsDto } from './dto/create-cars-dto';
 import { Cars } from './cars.model';
 import { InjectModel } from '@nestjs/sequelize';
@@ -14,7 +16,12 @@ export class CarsService {
   }
 
   async getAllCars() {
-    const cars = await this.carsRepository.findAll();
+    const cars = await this.carsRepository.findAll({
+      include: [Brands, Colors],
+      attributes: {
+        exclude: ['brandId', 'colorId']
+      }
+    });
     return cars;
   }
 

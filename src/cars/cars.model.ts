@@ -1,9 +1,6 @@
-import { OneToMany } from 'typeorm/decorator/relations/OneToMany';
 import { Colors } from './../colors/color.model';
 import { Brands } from './../brands/brands.model';
-import { Model, Table, Column, DataType, BelongsTo, } from 'sequelize-typescript';
-
-
+import { Model, Table, Column, DataType, BelongsTo, ForeignKey, } from 'sequelize-typescript';
 interface CreateCarsAttr {
   model: string,
   brand: Brands,
@@ -29,11 +26,16 @@ export class Cars extends Model<Cars, CreateCarsAttr>{
   })
   model: string;
 
+  @ForeignKey(() => Brands)
+  brandId: number;
+
+  @ForeignKey(() => Colors)
+  colorId: number
 
   @BelongsTo(() => Brands)
-  brand: Brands[];
+  brand: Brands
 
   @BelongsTo(() => Colors)
-  color: Colors[]
+  color: Colors
 
 }

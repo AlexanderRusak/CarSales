@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger/dist';
-import { Model, DataType, Table, Column } from 'sequelize-typescript';
+import { Model, DataType, Table, Column, HasOne } from 'sequelize-typescript';
 import { Cars } from 'src/cars/cars.model';
-import { ManyToOne } from 'typeorm';
-
 
 interface BrandCreationsAttr {
   name: string
@@ -35,7 +33,7 @@ export class Brands extends Model<Brands, BrandCreationsAttr>{
   name: string;
 
 
-  @ManyToOne(() => Cars, (car) => car.brand)
+  @HasOne(() => Cars, 'brandId')
   car: Cars
 
 }
