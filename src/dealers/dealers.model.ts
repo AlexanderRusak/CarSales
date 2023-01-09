@@ -1,4 +1,5 @@
-import { Model, Table, Column, DataType } from 'sequelize-typescript';
+import { CarDealers } from './../car-dealers/car-dealers.model';
+import { Model, Table, Column, DataType, HasOne } from 'sequelize-typescript';
 
 
 interface DealerCreationAttr {
@@ -30,5 +31,8 @@ export class Dealers extends Model<Model, DealerCreationAttr> {
     allowNull: false,
   })
   phone: string
+
+  @HasOne(() => CarDealers, 'dealerId')
+  carDealer: CarDealers
 
 }

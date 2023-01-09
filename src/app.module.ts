@@ -1,3 +1,4 @@
+import { CarDealers } from './car-dealers/car-dealers.model';
 import { Dealers } from './dealers/dealers.model';
 import { ColorsModule } from './colors/colors.module';
 import { Module } from '@nestjs/common';
@@ -9,6 +10,7 @@ import { Colors } from './colors/color.model';
 import { DealersModule } from './dealers/dealers.module';
 import { CarsModule } from './cars/cars.module';
 import { Cars } from './cars/cars.model';
+import { CarDealersModule } from './car-dealers/car-dealers.module';
 
 @Module({
   controllers: [],
@@ -24,13 +26,14 @@ import { Cars } from './cars/cars.model';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Brands, Colors, Dealers, Cars],
+      models: [Brands, Colors, Dealers, Cars, CarDealers],
       autoLoadModels: true
     }),
     BrandsModule,
     ColorsModule,
     DealersModule,
-    CarsModule
+    CarsModule,
+    CarDealersModule
   ]
 })
 export class AppModule { }

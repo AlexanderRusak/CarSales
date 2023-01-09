@@ -1,6 +1,7 @@
+import { CarDealers } from './../car-dealers/car-dealers.model';
 import { Colors } from './../colors/color.model';
 import { Brands } from './../brands/brands.model';
-import { Model, Table, Column, DataType, BelongsTo, ForeignKey, } from 'sequelize-typescript';
+import { Model, Table, Column, DataType, BelongsTo, ForeignKey, HasOne, } from 'sequelize-typescript';
 interface CreateCarsAttr {
   model: string,
   brand: Brands,
@@ -37,5 +38,8 @@ export class Cars extends Model<Cars, CreateCarsAttr>{
 
   @BelongsTo(() => Colors)
   color: Colors
+
+  @HasOne(() => CarDealers, 'carId')
+  carDealer: CarDealers
 
 }

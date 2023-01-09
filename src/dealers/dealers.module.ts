@@ -1,3 +1,4 @@
+import { CarDealers } from './../car-dealers/car-dealers.model';
 import { Dealers } from './dealers.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Module } from '@nestjs/common';
@@ -9,7 +10,7 @@ import { DealersService } from './dealers.service';
   providers: [DealersService],
   imports: [
     SequelizeModule.forFeature([
-      Dealers
+      Dealers, CarDealers
     ])
   ]
 })
