@@ -4,6 +4,7 @@ import { CreateCarsDto } from './dto/create-cars-dto';
 import { Cars } from './cars.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class CarsService {
@@ -22,6 +23,42 @@ export class CarsService {
         exclude: ['brandId', 'colorId']
       }
     });
+    return cars;
+  }
+
+  async getCarsByBrandId(brandName: string) {
+    const cars = await this.carsRepository.findAll({
+      /*       raw: true, */
+      include: [
+        {
+          model: Brands,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+          where: {
+            name: brandName
+          }
+        },
+        {
+          model: Colors,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+        }],
+      /*       attributes: {
+              include: [
+                [Sequelize.col('brand.name'), 'brand'],
+                [Sequelize.col('brand.brandImageUrl'), 'brandImageUrl'],
+                [Sequelize.col('color.name'), 'color'],
+                [Sequelize.col('color.hex'), 'hex']],
+              exclude: ['brandId', 'colorId', 'id', 'createdAt', 'updatedAt', 'brand.name', 'brand.brandImageUrl', 'color.name', 'color.hex'],
+            }, */
+      attributes: {
+        exclude: ['brandId', 'colorId', 'id', 'createdAt', 'updatedAt'],
+      },
+    });
+
+
     return cars;
   }
 

@@ -2,7 +2,8 @@ import { Cars } from './../cars/cars.model';
 import { Model, Table, Column, DataType, HasOne } from 'sequelize-typescript';
 
 interface ColorCreationAttr {
-  name: string
+  name: string;
+  hex: string;
 }
 
 @Table({
@@ -24,6 +25,12 @@ export class Colors extends Model<Colors, ColorCreationAttr>{
     allowNull: false
   })
   name: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
+  hex: string;
 
   @HasOne(() => Cars, "colorId")
   car: Cars

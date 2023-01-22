@@ -20,8 +20,6 @@ export class BrandsController {
   create(@Body() brandDto: CreateBrandDto) {
     return this.brandService.createBrand(brandDto)
   }
-
-
   @ApiOperation({
     summary: 'Get all brands'
   })
@@ -33,5 +31,4 @@ export class BrandsController {
   getAll() {
     return this.brandService.getAllBrands()
   }
-
 }
